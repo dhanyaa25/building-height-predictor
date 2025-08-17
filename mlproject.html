@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Building Height Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="background: url('{{ url_for('static', filename='ohio.png') }}') no-repeat center center fixed; background-size: cover;">
+    <div class="container">
+        <h1>Building Height Predictor</h1>
+        <form method="POST" action="/predict">
+            <div class="form-group">
+                <label>Soil Type:</label>
+                <select name="soil" required>
+                    <option>Loam</option>
+                    <option>Clay</option>
+                    <option>Sandy</option>
+                    <option>Silty</option>
+                    <option>Peaty</option>
+                    <option>Chalky</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Moisture (%):</label>
+                <input type="number" name="moisture" step="0.01" placeholder="e.g., 10–50" required>
+            </div>
+
+            <div class="form-group">
+                <label>Clay (%):</label>
+                <input type="number" name="clay" step="0.01" placeholder="e.g., 5–60" required>
+            </div>
+
+            <div class="form-group">
+                <label>Sand (%):</label>
+                <input type="number" name="sand" step="0.01" placeholder="e.g., 10–80" required>
+            </div>
+
+            <div class="form-group">
+                <label>Silt (%):</label>
+                <input type="number" name="silt" step="0.01" placeholder="e.g., 5–40" required>
+            </div>
+
+            <div class="form-group">
+                <label>pH:</label>
+                <input type="number" name="ph" step="0.01" placeholder="e.g., 5.5–8.5" required>
+            </div>
+
+            <div class="form-group">
+                <label>Bearing Capacity (kPa):</label>
+                <input type="number" name="bc" step="0.01" placeholder="e.g., 50–400" required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Predict</button>
+            </div>
+        </form>
+
+        {% if result %}
+            <div class="result">{{ result|safe }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
